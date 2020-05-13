@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/eatbgnew"
+    tools:context=".EatIt.Signin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/common_google_signin_btn_text_light_default"
+        android:orientation="vertical">
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone Number"
+            android:textColorHint="@android:color/white"
+            android:inputType="phone"
+            android:text="(808)555-5555"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            app:met_baseColor="@android:color/white"
+            app:met_floatingLabel="highlight"
+            app:met_maxCharacters="13"
+            app:met_primaryColor="@android:color/white"
+            app:met_singleLineEllipsis="true" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:orientation="horizontal">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/editTextPW"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/common_google_signin_btn_text_light_pressed"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:text="12345"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="24sp"
+                app:met_baseColor="@android:color/white"
+                app:met_floatingLabel="highlight"
+                app:met_maxCharacters="13"
+                app:met_primaryColor="@android:color/white"
+                app:met_singleLineEllipsis="true" />
+
+            <ImageButton
+                android:id="@+id/showHideBtn"
+                android:layout_width="3dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_remove_red_eye_black_24dp"
+                android:tint="@android:color/white" />
+
+        </LinearLayout>
+
+        <com.rey.material.widget.CheckBox
+            android:id="@+id/chkRemeber"
+            style="@style/Material.Drawable.CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="Remember me"
+            android:textColor="@android:color/white"
+            app:cbd_strokeColor="@android:color/white"
+            app:cbd_tickColor="@color/colorPrimaryDark" />
+
+
+    </LinearLayout>
+
+    <com.dd.processbutton.FlatButton
+        android:id="@+id/signinBtn"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        app:pb_cornerRadius="10dp"
+        android:layout_gravity="left"
+        android:paddingRight="15dp"
+        android:text="@string/signinmain"
+        android:textColor="@android:color/white"
+        app:pb_colorNormal="@color/fbutton_color_wisteria"
+        app:pb_colorPressed="@color/purple_progress" />
+
+</RelativeLayout>
