@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,7 +22,6 @@ import com.project.eatit.Database.Database;
 import com.project.eatit.Model.Food;
 import com.project.eatit.Model.Order;
 import com.project.eatit.R;
-import com.rey.material.widget.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 
@@ -47,7 +47,7 @@ public class FoodDetails extends AppCompatActivity {
 
         // Init Firebase
         database = FirebaseDatabase.getInstance();
-        foods = database.getReference("Foods");
+        foods = database.getReference("Food");
 
         //init view
         numberButton = findViewById(R.id.number_button);

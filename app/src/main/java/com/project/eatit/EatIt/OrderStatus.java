@@ -48,16 +48,16 @@ public class OrderStatus extends AppCompatActivity {
 
 
         if(getIntent() == null)
-            loadOrders(Common.currentUser.getPhone());
+            loadOrders(Common.currentUser.getName());
         else
-            loadOrders(getIntent().getStringExtra("userPhone"));
+            loadOrders(getIntent().getStringExtra("userName"));
 
-        loadOrders(Common.currentUser.getPhone());
+        loadOrders(Common.currentUser.getName());
     }
 
-    private void loadOrders (String phone) {
+    private void loadOrders (String name) {
 
-        FirebaseRecyclerOptions<Request> options = new FirebaseRecyclerOptions.Builder<Request>().setQuery(requests.orderByChild("phone").equalTo(phone), Request.class).build();
+        FirebaseRecyclerOptions<Request> options = new FirebaseRecyclerOptions.Builder<Request>().setQuery(requests.orderByChild("name").equalTo(name), Request.class).build();
 
         adapter = new FirebaseRecyclerAdapter<Request, OrderViewHolder>(options) {
             @Override
@@ -65,7 +65,7 @@ public class OrderStatus extends AppCompatActivity {
                 orderViewHolder.txtOrderId.setText(adapter.getRef(i).getKey());
                 orderViewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(request.getStatus()));
                 orderViewHolder.txtOrderAddress.setText(request.getAddress());
-                orderViewHolder.txtOrderPhone.setText(request.getPhone());
+               // orderViewHolder.txtOrderName.setText(request.getName());
                 orderViewHolder.setItemClickListener(new ItemClickListener(){
                   @Override
                   public void onClick(View view, int postion, boolean isLongClick) {

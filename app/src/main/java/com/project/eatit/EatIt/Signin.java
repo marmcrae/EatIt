@@ -6,12 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,7 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.project.eatit.Common.Common;
-import com.project.eatit.Model.user;
+import com.project.eatit.Model.User;
 import com.project.eatit.R;
 
 import io.paperdb.Paper;
@@ -95,8 +92,8 @@ public class Signin extends AppCompatActivity {
 
 
                             mDialog.dismiss();
-                            user user = dataSnapshot.child(phoneNumET.getText().toString()).getValue(user.class);
-                            if (user.getPasword().equals(passwordET.getText().toString())) {
+                            User user = dataSnapshot.child(phoneNumET.getText().toString()).getValue(User.class);
+                            if (user.getPassword().equals(passwordET.getText().toString())) {
 
                                 Intent homeIntent = new Intent(Signin.this, Home.class);
                                 Common.currentUser = user;

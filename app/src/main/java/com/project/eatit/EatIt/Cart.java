@@ -1,6 +1,6 @@
 package com.project.eatit.EatIt;
 
-import androidx.annotation.RequiresApi;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +10,7 @@ import android.app.assist.AssistStructure;
 import android.content.DialogInterface;
 import android.icu.text.NumberFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class Cart extends AppCompatActivity {
+public class Cart extends AppCompatActivity{
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -52,6 +53,7 @@ public class Cart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+
         database = FirebaseDatabase.getInstance();
         requests = database.getReference("Requests");
 
@@ -65,9 +67,9 @@ public class Cart extends AppCompatActivity {
         btnPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cart.size() > 0 )
-                    showAlertDialog();
-                else
+                if(cart.size() > 0 ) {
+                     showAlertDialog();
+                } else
                     Toast.makeText(Cart.this, "Your Cart is Empty", Toast.LENGTH_LONG).show();
 
             }
@@ -78,6 +80,26 @@ public class Cart extends AppCompatActivity {
         loadListFood();
     }
 
+
+
+
+    private void loadListFood() {
+        cart = new Database(this).getCarts();
+        adapter = new CartAdapter(cart, this);
+        adapter.notifyDataSetChanged();
+        recyclerView.setAdapter(adapter);
+
+        //calculating total price
+        int total = 0;
+        for (Order order : cart)
+            total += (Integer.parseInt(order.getPrice())) * (Integer.parseInt(order.getQuantity()));
+        Locale locale = new Locale("en", "US");
+        NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
+
+        txtTotalPrice.setText(fmt.format(total));
+
+
+    }
 
     private void showAlertDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(Cart.this);
@@ -98,12 +120,13 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Request request = new Request(
-                        Common.currentUser.getPhone(),
                         Common.currentUser.getName(),
+                        Common.currentUser.getPhone(),
                         edtAddress.getText().toString(),
                         txtTotalPrice.getText().toString(),
                         cart
                 );
+
 
                 requests.child(String.valueOf(System.currentTimeMillis())).setValue(request);
 
@@ -113,27 +136,14 @@ public class Cart extends AppCompatActivity {
 
             }
         });
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
 
-
-
-    }
-
-    private void loadListFood() {
-        cart = new Database(this).getCarts();
-        adapter = new CartAdapter(cart, this);
-        adapter.notifyDataSetChanged();
-        recyclerView.setAdapter(adapter);
-
-        //calculating total price
-        int total = 0;
-        for (Order order : cart)
-            total += (Integer.parseInt(order.getPrice())) * (Integer.parseInt(order.getQuantity()));
-        Locale locale = new Locale("en", "US");
-        NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
-
-        txtTotalPrice.setText(fmt.format(total));
-
-
+        alertDialog.show();
     }
 
     @Override
@@ -151,4 +161,6 @@ public class Cart extends AppCompatActivity {
             new Database(this).addToCart(item);
         loadListFood();
     }
+
+
 }

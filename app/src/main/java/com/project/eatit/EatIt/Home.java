@@ -56,12 +56,12 @@ public class Home extends AppCompatActivity
         toolbar.setTitle("Menu");
         setSupportActionBar(toolbar);
 
-//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+      // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         // Init Firebase
         database = FirebaseDatabase.getInstance();
         category = database.getReference("Category");
-//        category.keepSynced(true);
+        category.keepSynced(true);
 
         // init paper
         Paper.init(this);
@@ -84,12 +84,12 @@ public class Home extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-//         set name for user
-//        View headerView = navigationView.getHeaderView(0);
-//        TextFullName = headerView.findViewById(R.id.txtFullName);
-//        TextFullName.setText(Common.currentUser.getName());
 
-// Load menu
+        View headerView = navigationView.getHeaderView(0);
+        TextFullName = headerView.findViewById(R.id.txtFullName);
+        //TextFullName.setText(user.getName());
+
+
         recycler_menu = findViewById(R.id.recycler_menu);
         recycler_menu.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);

@@ -5,12 +5,15 @@ public class Category {
     private String Name;
     private String Image;
 
+
+
     public Category() {
     }
 
-    public Category(String name, String image) {
+    public Category(String name, String image, String categoryId) {
         Name = name;
         Image = image;
+
     }
 
     public String getName() {
@@ -28,4 +31,7 @@ public class Category {
     public void setImage(String image) {
         Image = image;
     }
-}
+
+
+    }
+

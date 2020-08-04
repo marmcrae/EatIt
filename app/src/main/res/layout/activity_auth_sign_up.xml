@@ -22,13 +22,13 @@
 
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/btnSignin"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
         android:layout_gravity="bottom"
         android:layout_margin="8dp"
         android:text="Sign In"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white" />
 
 
 </LinearLayout>

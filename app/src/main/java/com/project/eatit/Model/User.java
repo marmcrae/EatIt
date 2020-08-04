@@ -1,18 +1,18 @@
 package com.project.eatit.Model;
 
-public class user {
+public class User {
 
     private String Name;
-    private String Pasword;
+    private String Password;
     private String Phone;
     private String IsStaff;
 
-    public user() {
+    public User() {
     }
 
-    public user(String name, String pasword) {
+    public User(String name, String password) {
         Name = name;
-        Pasword = pasword;
+        Password = password;
         IsStaff = "false";
     }
 
@@ -32,12 +32,12 @@ public class user {
         Name = name;
     }
 
-    public String getPasword() {
-        return Pasword;
+    public String getPassword() {
+        return Password;
     }
 
-    public void setPasword(String pasword) {
-        Pasword = pasword;
+    public void setPassword(String password) {
+        Password = password;
     }
 
 

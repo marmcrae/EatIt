@@ -14,10 +14,16 @@ public  class Request implements CharSequence {
 
     private List<Order> foods;
 
-    public Request(String phone, String name, String s, String toString, List<Order> cart) {
+    public Request(String phone, String name, String address, String total, String status, List<Order> foods) {
+
     }
 
-    public Request(String phone, String name, String address, String total, String status, List<Order> foods) {
+    public Request() {
+
+    }
+
+
+    public Request(String name, String phone, String s, String toString, List<Order> cart) {
         this.phone = phone;
         this.name = name;
         this.address = address;
@@ -25,6 +31,7 @@ public  class Request implements CharSequence {
         this.status = "0";
         this.foods = foods;
     }
+
 
     public String getPhone() {
         return phone;

@@ -1,8 +1,8 @@
 package com.project.eatit.Model;
 
 public class Order {
-    private String ProduceId;
-    private String ProduceName;
+    private String ProductId;
+    private String ProductName;
     private String Quantity;
     private String Price;
     private String Discount;
@@ -14,27 +14,27 @@ public class Order {
 
 
     public Order(String produceId, String produceName, String quantity, String price, String discount) {
-        ProduceId = produceId;
-        ProduceName = produceName;
+        ProductId = produceId;
+        ProductName = produceName;
         Quantity = quantity;
         Price = price;
         Discount = discount;
     }
 
-    public String getProduceId() {
-        return ProduceId;
+    public String getProductId() {
+        return ProductId;
     }
 
-    public void setProduceId(String produceId) {
-        ProduceId = produceId;
+    public void setProductId(String productId) {
+        ProductId = productId;
     }
 
-    public String getProduceName() {
-        return ProduceName;
+    public String getProductName() {
+        return ProductName;
     }
 
-    public void setProduceName(String produceName) {
-        ProduceName = produceName;
+    public void setProductName(String produceName) {
+        ProductName = produceName;
     }
 
     public String getQuantity() {

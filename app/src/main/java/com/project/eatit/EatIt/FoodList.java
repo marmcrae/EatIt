@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,7 @@ public class FoodList extends AppCompatActivity {
 
 
         database = FirebaseDatabase.getInstance();
-        foodList = database.getReference("Foods");
+        foodList = database.getReference("Food");
 
         localDB = new Database(this);
 
@@ -68,14 +69,14 @@ public class FoodList extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
 
-        if (getIntent() !=null)
+        if (getIntent() != null)
 
             categoryId = getIntent().getStringExtra("CategoryId");
-        if (!categoryId.isEmpty() && categoryId !=null) {
+        if (!categoryId.isEmpty() && categoryId != null) {
             if (Common.isConnectedToInternet(getBaseContext()))
                 loadListFood(categoryId);
 
-            else{
+            else {
                 Toast.makeText(this, "Please Check the Internet Connection", Toast.LENGTH_LONG).show();
                 return;
             }
@@ -97,9 +98,8 @@ public class FoodList extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // when user type their text , change the suggest list
                 List<String> suggest = new ArrayList<String>();
-                for (String search : suggestList) {  // looping di suggestLIst
+                for (String search : suggestList) {
                     if (search.toLowerCase().contains(materialSearchBar.getText().toLowerCase()))
                         suggest.add(search);
                 }
@@ -115,7 +115,6 @@ public class FoodList extends AppCompatActivity {
         materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
             @Override
             public void onSearchStateChanged(boolean enabled) {
-                //when the search bar is close restore original adapter
                 if (!enabled) {
                     recyclerView.setAdapter(adapter);
                 }
@@ -123,7 +122,6 @@ public class FoodList extends AppCompatActivity {
 
             @Override
             public void onSearchConfirmed(CharSequence text) {
-                // when search is finish show the result of adapter
                 startSearch(text);
 
             }
@@ -138,7 +136,7 @@ public class FoodList extends AppCompatActivity {
 
     private void startSearch(CharSequence text) {
         FirebaseRecyclerOptions<Food> options =
-                new FirebaseRecyclerOptions.Builder<Food>().setQuery(foodList.orderByChild("name").equalTo(text.toString()), Food.class).build(); // compare name
+                new FirebaseRecyclerOptions.Builder<Food>().setQuery(foodList.orderByChild("Name").equalTo(text.toString()), Food.class).build(); // compare name
 
         searchAdapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(options) {
             @Override
@@ -146,11 +144,10 @@ public class FoodList extends AppCompatActivity {
                 foodViewHolder.food_name.setText(food.getName());
                 Picasso.get().load(food.getImage()).into(foodViewHolder.food_image);
 
-                // add to favourites
                 if (localDB.isFavorites(adapter.getRef(i).getKey()))
                     foodViewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
 
-                // click to change the favourites
+
                 foodViewHolder.fav_image.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -192,7 +189,7 @@ public class FoodList extends AppCompatActivity {
 
 
     private void loadSuggest() {
-        foodList.orderByChild("menuId").equalTo(categoryId).addValueEventListener(new ValueEventListener() {
+        foodList.orderByChild("MenuId").equalTo(categoryId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -210,15 +207,14 @@ public class FoodList extends AppCompatActivity {
 
     private void loadListFood(String categoryId) {
 
-
         FirebaseRecyclerOptions<Food> options =
-                new FirebaseRecyclerOptions.Builder<Food>().setQuery(foodList.orderByChild("menuId").equalTo(categoryId), Food.class).build();
+                new FirebaseRecyclerOptions.Builder<Food>().setQuery(foodList.orderByChild("MenuId").equalTo(categoryId), Food.class).build();
 
         adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull FoodViewHolder foodViewHolder, int i, @NonNull final Food food) {
                 foodViewHolder.food_name.setText(food.getName());
-                Picasso.get().load(food.getImage()).into(foodViewHolder.food_image);
+                Picasso.get().load(food.getImage()).placeholder(R.drawable.loading).fit().into(foodViewHolder.food_image);
 
                 foodViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
@@ -243,5 +239,10 @@ public class FoodList extends AppCompatActivity {
         adapter.startListening();
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
+
+
     }
 }
+
+
+

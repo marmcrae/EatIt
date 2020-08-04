@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Database extends SQLiteAssetHelper {
 
-    private static final String DB_NAME = "DB.db";
+    private static final String DB_NAME = "EaitDB.db";
     private  static final int DB_VER = 1;
 
 
@@ -36,8 +36,8 @@ public class Database extends SQLiteAssetHelper {
         if (c.moveToFirst()) {
             do{
                 result.add(new Order(
-                        c.getString(c.getColumnIndex("ProduceId")),
-                        c.getString(c.getColumnIndex("ProduceName")),
+                        c.getString(c.getColumnIndex("ProductId")),
+                        c.getString(c.getColumnIndex("ProductName")),
                         c.getString(c.getColumnIndex("Quantity")),
                         c.getString(c.getColumnIndex("Price")),
                         c.getString(c.getColumnIndex("Discount"))
@@ -53,11 +53,13 @@ public class Database extends SQLiteAssetHelper {
     public void addToCart (Order order) {
         SQLiteDatabase db = getReadableDatabase();
         String query = String.format("INSERT INTO OrderDetail( ProductId, ProductName, Quantity, Price, Discount) VALUES ('%s','%s','%s','%s','%s');",
-                order.getProduceId(),
-                order.getProduceName(),
+                order.getProductId(),
+                order.getProductName(),
                 order.getQuantity(),
                 order.getPrice(),
                 order.getDiscount());
+
+
 
             db.execSQL(query);
 

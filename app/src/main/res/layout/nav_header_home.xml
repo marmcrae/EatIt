@@ -9,11 +9,17 @@
     android:theme="@style/ThemeOverlay.AppCompat.Light">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/txtFullName"
+        android:layout_width="308dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/boogaloo"
         android:paddingTop="10dp"
-        android:text="Eat it"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:text="EatIt!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textColorHighlight="@color/colorText"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
+        android:textColorLink="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="75sp" />
 
     </LinearLayout>

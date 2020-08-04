@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.project.eatit.Common.Common;
-import com.project.eatit.Model.user;
+import com.project.eatit.Model.User;
 import com.project.eatit.R;
 
 public class SignUp extends AppCompatActivity {
@@ -50,8 +50,8 @@ public class SignUp extends AppCompatActivity {
             public void onClick(View v) {
 
                 String number = signUpPhoneET.getText().toString();
-                if ( number.isEmpty() || number.length()< 13) {
-                    signUpPhoneET.setError("Number is Required");
+                if ( number.isEmpty() || number.length()> 13) {
+                    signUpPhoneET.setError("Please enter valid 10 digit phone number");
                     signUpPhoneET.requestFocus();
                     return;
                 }
@@ -60,7 +60,7 @@ public class SignUp extends AppCompatActivity {
 
                     phoneNumber = number;
 
-                    Intent intent = new Intent (SignUp.this, AuthSignUp.class);
+                    Intent intent = new Intent (SignUp.this, Home.class);
                     intent.putExtra("phoneNumber", phoneNumber);
                     startActivity(intent);
                 }
@@ -76,11 +76,11 @@ public class SignUp extends AppCompatActivity {
                         if (dataSnapshot.child(signUpPhoneET.getText().toString()).exists()) {
 
                             mDialog.dismiss();
-                            Toast.makeText(SignUp.this, "Phone number already registered...", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUp.this, "Phone number registered", Toast.LENGTH_LONG).show();
                         } else {
 
                             mDialog.dismiss();
-                            user user = new user(signUpNameET.getText().toString(), signUpPWET.getText().toString());
+                            User user = new User(signUpNameET.getText().toString(), signUpPWET.getText().toString());
                             table_user.child(signUpPhoneET.getText().toString()).setValue(user);
                             Toast.makeText(SignUp.this, "User created!", Toast.LENGTH_LONG).show();
                             finish();

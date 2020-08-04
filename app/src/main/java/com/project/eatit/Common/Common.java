@@ -4,11 +4,11 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.project.eatit.Model.user;
+import com.project.eatit.Model.User;
 
 public class Common {
 
-    public static user currentUser;
+    public static User currentUser;
     public static final String DELETE = "Delete";
     public static final String USER_KEY = "User";
     public static final String PWD_KEY = "Password";
