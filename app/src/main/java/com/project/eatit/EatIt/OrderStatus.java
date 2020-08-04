@@ -65,7 +65,8 @@ public class OrderStatus extends AppCompatActivity {
                 orderViewHolder.txtOrderId.setText(adapter.getRef(i).getKey());
                 orderViewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(request.getStatus()));
                 orderViewHolder.txtOrderAddress.setText(request.getAddress());
-               // orderViewHolder.txtOrderName.setText(request.getName());
+                orderViewHolder.txtOrderFood.setText(request.getFoods().toString());
+                orderViewHolder.txtOrderTotal.setText(request.getTotal());
                 orderViewHolder.setItemClickListener(new ItemClickListener(){
                   @Override
                   public void onClick(View view, int postion, boolean isLongClick) {

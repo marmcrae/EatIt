@@ -24,12 +24,12 @@ public  class Request implements CharSequence {
 
 
     public Request(String name, String phone, String s, String toString, List<Order> cart) {
-        this.phone = phone;
         this.name = name;
-        this.address = address;
-        this.total = total;
+        this.phone = phone;
+        this.address = s;
+        this.total = toString;
         this.status = "0";
-        this.foods = foods;
+        this.foods = cart;
     }
 
 

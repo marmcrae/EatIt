@@ -22,8 +22,8 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
         txtOrderStatus = itemView.findViewById(R.id.order_status);
         txtOrderPhone = itemView.findViewById(R.id.order_phone);
 //        txtOrderName = itemView.findViewById(R.id.order_name);
-//        txtOrderFood = itemView.findViewById(R.id.order_food);
-//        txtOrderTotal = itemView.findViewById(R.id.order_total);
+        txtOrderFood = itemView.findViewById(R.id.order_food);
+        txtOrderTotal = itemView.findViewById(R.id.order_total);
 
 
         itemView.setOnClickListener(this);
